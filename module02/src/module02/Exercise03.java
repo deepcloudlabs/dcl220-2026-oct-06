@@ -1,6 +1,5 @@
 package module02;
 
-
 interface Shape {
 	public double area();
 

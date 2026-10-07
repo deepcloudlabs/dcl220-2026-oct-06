@@ -40,9 +40,6 @@ interface ScannerGoogleDrive {
 	void scanToGoogleDrive();
 }
 
-interface SuperScanner extends ScannerUSB,ScannerEmail,ScannerGoogleDrive{}
-
-
 class OfficePrinter implements Machine {
 
 	@Override
