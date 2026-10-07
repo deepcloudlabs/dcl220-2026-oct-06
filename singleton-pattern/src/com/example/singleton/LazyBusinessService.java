@@ -19,8 +19,8 @@ public class LazyBusinessService {
 
 	public static BusinessService getInstance() {
 		if (isNull(instance))
-			// instance = new MyBusinessService(); // Once
-			instance = () -> {};
+			instance = new MyBusinessService(); // Once
+			//instance = () -> {};
 		return instance;
 	}
 	
