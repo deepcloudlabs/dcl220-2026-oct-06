@@ -64,7 +64,7 @@ class SlowSubcriber implements Flow.Subscriber<RichTradeEvent> {
 
 	@Override
 	public void onNext(RichTradeEvent event) {
-		//try {TimeUnit.SECONDS.sleep(5);}catch(Exception e) {}
+		try {TimeUnit.SECONDS.sleep(5);}catch(Exception e) {}
 		System.err.println("[%s]SlowSubcriber: Handling event [%s]".formatted(Thread.currentThread().getName(),event));
 		this.subscription.request(1); // pull-based
 	}

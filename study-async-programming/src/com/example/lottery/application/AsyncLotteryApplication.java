@@ -5,7 +5,7 @@ import java.util.concurrent.TimeUnit;
 import com.example.lottery.service.AsyncStandardLotteryService;
 
 public class AsyncLotteryApplication {
-	// Throughput: 33 lottery numbers per second
+	// Throughput: 33.33 lottery numbers per second
 	public static void main(String[] args) throws InterruptedException {
 		var lotteryService = new AsyncStandardLotteryService();
 		System.err.println("Application is started!");
