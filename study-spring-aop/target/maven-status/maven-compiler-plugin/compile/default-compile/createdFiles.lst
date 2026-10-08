@@ -1,0 +1,8 @@
+com\example\aop\ErrorAspect.class
+com\example\aop\AuditAspect.class
+com\example\service\Calculator.class
+com\example\aop\ProfileAspect.class
+com\example\config\AppConfig.class
+com\example\App.class
+com\example\aop\Profile.class
+com\example\service\impl\SimpleCalculator.class
