@@ -14,7 +14,7 @@ abstract class ImageLoader {
 
     protected ImageLoader next = null;
 
-    public ImageLoader setNext(ImageLoader next) {
+    public ImageLoader next(ImageLoader next) {
     	this.next = next;
     	return next;
     }
@@ -24,6 +24,7 @@ abstract class ImageLoader {
     
 }
 
+@Loader(order=-1)
 class JpegImageLoader extends ImageLoader {
 
 	@Override
@@ -55,6 +56,40 @@ class JpegImageLoader extends ImageLoader {
 	}
 }
 
+@Loader(order=2)
+class Jpeg2000ImageLoader extends ImageLoader {
+
+	@Override
+	public Image loadImage(String fileName) {
+		if (canReadImage(fileName)) {
+			return new JpegImage2000();
+		}
+		if (Objects.nonNull(next))
+			return next.loadImage(fileName);
+		throw new IllegalStateException("Cannot handle image: %s".formatted(fileName));
+	}
+
+	private boolean canReadImage(String fileName) {
+		return ThreadLocalRandom.current().nextInt(10) < 2;
+	}
+
+	public static class JpegImage2000 implements Image {
+
+		@Override
+		public byte[] getImageData() {
+			return null;
+		}
+
+		@Override
+		public Size getSize() {
+			return new Size(1024,1024);
+		}
+		
+	}
+}
+
+
+@Loader(order=1)
 class PngImageLoader extends ImageLoader {
 	
 	@Override
@@ -86,6 +121,7 @@ class PngImageLoader extends ImageLoader {
 	}
 }
 
+@Loader(order=5)
 class TiffImageLoader extends ImageLoader {
 	
 	@Override
@@ -117,6 +153,7 @@ class TiffImageLoader extends ImageLoader {
 	}
 }
 
+@Loader(order=-10)
 class GifImageLoader extends ImageLoader {
 	
 	@Override
@@ -151,16 +188,16 @@ class GifImageLoader extends ImageLoader {
 public class ChainOfResponsibilityDemo2 {
 
     public static void main(String[] args) {
-        var imageLoader = getImageLoader();
+        var imageLoader = makeImageLoader();
         Image image = imageLoader.loadImage("image01");
         System.out.println("%s: %s".formatted(image.getClass().getSimpleName(),image.getSize()));
     }
 
-	private static ImageLoader getImageLoader() {
+	private static ImageLoader makeImageLoader() {
 		var jpegImageLoader = new JpegImageLoader();
-		jpegImageLoader.setNext(new PngImageLoader())
-		               .setNext(new TiffImageLoader())
-		               .setNext(new GifImageLoader());
+		jpegImageLoader.next(new PngImageLoader())
+		               .next(new TiffImageLoader())
+		               .next(new GifImageLoader());
 		return jpegImageLoader;
 	}
 }
