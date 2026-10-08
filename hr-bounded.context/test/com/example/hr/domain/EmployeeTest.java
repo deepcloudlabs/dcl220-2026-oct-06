@@ -15,8 +15,9 @@ class EmployeeTest {
 		var emp = new Employee.Builder(identity)
 				              .fullName(firstName, lastName)
 				              .salary(salary, currency)
-				              .iban(iban)
 				              .birthYear(birthYear)
+				     
+				              .iban(iban)
 				              .email(email)
 				              .jobStyle(jobStyle)
 				              .photo(photo)

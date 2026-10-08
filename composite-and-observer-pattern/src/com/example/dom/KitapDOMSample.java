@@ -27,6 +27,8 @@ public class KitapDOMSample {
         try {
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             DocumentBuilder builder = factory.newDocumentBuilder();
+            System.out.println(factory.getClass());
+            System.out.println(builder.getClass());
             document = builder.parse(new File(xmlFileName));
             System.out.println(factory.getClass().getName());
             System.out.println(builder.getClass().getName());

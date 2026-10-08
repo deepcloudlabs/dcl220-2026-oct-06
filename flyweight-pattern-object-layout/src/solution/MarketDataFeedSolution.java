@@ -18,7 +18,7 @@ bytes per quote  : ~55
  */
 public class MarketDataFeedSolution {
 	private static final int INSTRUMENTS = 3_000;
-    private static final int QUOTES = 2_000_000;
+    private static final int QUOTES = 400_000;
 
     public static void main(String[] args) {
         Runtime runtime = Runtime.getRuntime();
