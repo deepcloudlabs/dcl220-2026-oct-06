@@ -1,22 +1,25 @@
 package com.example.factory;
 
+import java.util.Map;
+import java.util.Optional;
+
 /**
  *
  * @author Binnur Kurt <binnur.kurt@gmail.com>
  */
 public class ImageReaderFactory {
-	public static ImageReader createImageReader(String fileName) {
+	private static Map<String,ImageReader> IMAGE_READERS = Map.of(
+		"jpg", new JpegReader(),
+		"jpeg", new JpegReader(),
+		"gif", new GifReader(),
+		"png", new PngReader(),
+		"j2k", new Jpeg2000Reader(),
+		"jpeg2k", new Jpeg2000Reader()			
+	);
+			
+	public static Optional<ImageReader> createImageReader(String fileName) {
 		String[] listOfString = fileName.split("\\.");
 		String ext = listOfString[listOfString.length - 1].toLowerCase();
-		if (ext.equals("jpg") || ext.equals("jpeg"))
-			return new JpegReader();
-		else if (ext.equals("gif"))
-			return new GifReader();
-		else if (ext.equals("png"))
-			return new PngReader();
-		else if (ext.equals("j2k") || ext.equals("jpeg2k"))
-			return new Jpeg2000Reader();
-
-		return new NotSupported();
+		return Optional.ofNullable(IMAGE_READERS.get(ext));
 	}
 }
