@@ -6,6 +6,7 @@ import java.util.List;
 
 public class Exercise08 {
 
+	@SuppressWarnings("unused")
 	public static void main(String[] args) {
 		// Stack extends Vector
 		var numbers = new ArrayList<>(List.of(1,2,3,4,5));

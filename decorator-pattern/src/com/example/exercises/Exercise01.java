@@ -8,6 +8,7 @@ import java.io.ObjectInputStream;
 
 public class Exercise01 {
 
+	@SuppressWarnings("unused")
 	public static void main(String[] args) throws IOException, ClassNotFoundException {
 		try(ObjectInputStream ois = new ObjectInputStream(
 				                         new BufferedInputStream(
@@ -24,8 +25,9 @@ public class Exercise01 {
 		fis.read();
 		var bfis = new BufferedInputStream(fis);
 		bfis.read();
-		var obfis = new ObjectInputStream(bfis);
-		var o = obfis.readObject();
+		try (var obfis = new ObjectInputStream(bfis)) {
+			var o = obfis.readObject();
+		}
 	}
 
 }
