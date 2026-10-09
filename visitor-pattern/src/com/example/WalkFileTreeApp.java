@@ -6,7 +6,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.ZonedDateTime;
 
-import com.example.util.PrintTree;
+import com.example.util.OldFileVisitor;
 
 public class WalkFileTreeApp {
 
@@ -24,8 +24,8 @@ public class WalkFileTreeApp {
         try {
             // Files.walkFileTree(path, new PrintTree());
         	ZonedDateTime fiveYearAgo = ZonedDateTime.now().minusYears(5);
-        	Files.walkFileTree(path, new PrintTree());
-        	//Files.walkFileTree(path, new OldFileVisitor(fiveYearAgo.toInstant()));
+        	//Files.walkFileTree(path, new PrintTree());
+        	Files.walkFileTree(path, new OldFileVisitor(fiveYearAgo.toInstant()));
         } catch (IOException e) {
             System.out.println("Exception: " + e);
         }
